@@ -21,6 +21,7 @@ class Corn {
 
 	method serCosechado() {
 	  self.validarSerCosechado()
+	  game.removeVisual(self)
 	}
 
 	method validarSerCosechado() {
@@ -60,6 +61,7 @@ class Corn {
 
 	method serCosechado() {
 	  self.validarSerCosechado()
+	  game.removeVisual(self)
 	}
 
 	method validarSerCosechado() {
@@ -107,7 +109,9 @@ class Corn {
 	  image = "tomaco.png" //supongo que tiene que correr cunado ya esta maduro y lo siguen regando porque existe tomaco adulto
 	}
 
-	method serCosechado() {}
+	method serCosechado() {
+		game.removeVisual(self)
+	}
 
 	method precio() {
 	  return 80

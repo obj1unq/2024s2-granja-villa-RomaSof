@@ -17,9 +17,9 @@ program farmville {
 	keyboard.w().onPressDo({hector.sembrar( new Wheat() )})
 	keyboard.e().onPressDo({hector.sembrar( new Tomaco() )})
 	keyboard.r().onPressDo({hector.regar()})
-	keyboard.c().onPressDo({hector.cosecha()})
+	keyboard.c().onPressDo({hector.cosechar()})
 	keyboard.v().onPressDo({hector.vender()})
-	keyboard.space().onPressDo({hector.text()})
+	keyboard.space().onPressDo({hector.hablar()})
  	
  	//  COMIENZA
 	game.start()

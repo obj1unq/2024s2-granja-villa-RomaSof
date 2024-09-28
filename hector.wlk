@@ -35,9 +35,9 @@ object hector {
 
 	method cosechar() {
 	  self.validarCosechar()
-	  game.uniqueCollider(self).serCosechado()
 	  cosecha.add(game.uniqueCollider(self))
-	  game.removeVisual(game.uniqueCollider(self))
+	  game.uniqueCollider(self).serCosechado()
+	  //game.removeVisual(game.uniqueCollider(self)) es responsabilidad de hector o la planta?
 	}
 
 	method validarCosechar() {
@@ -57,8 +57,13 @@ object hector {
 	  }
 	}
 
-	method text() {
-	  "tengo" + ganancias "monedas y" + cosecha.size() + "plantas para vender"  
+	method hablar() {
+	  game.say(self, self.mensajeADecir())
+	  //"tengo" + ganancias "monedas y" + cosecha.size() + "plantas para vender"  
+	}
+
+	method mensajeADecir() {
+	return "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender "
 	}
 
 }
