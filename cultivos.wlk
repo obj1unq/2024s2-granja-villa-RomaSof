@@ -47,7 +47,6 @@ class Corn {
 
 	method image() {
 	  return "wheat_" + madurez + ".png"
-	  //return "wheat_0.png"
 	}
 
 	method crecer() {
@@ -87,11 +86,11 @@ class Corn {
 	}
 	//no me sale hacer que salga corriendo :(
 	method crecer() {
-	  //return "tomaco.png"
 	  vecesRegada = vecesRegada + 1
-	  self.madurarOCorrer()
+	  self.madurar()
+	  //self.madurarOCorrer()
 	}
-
+/*
 	method madurarOCorrer() {
 	  if(vecesRegada > 1){
 		self.correr()
@@ -103,7 +102,7 @@ class Corn {
 	method correr() { 
 	  //self.position()+1.y().max(10)
 	}
-
+*/
 	method madurar() {
 	  image = "tomaco.png" //supongo que tiene que correr cunado ya esta maduro y lo siguen regando porque existe tomaco adulto
 	}
