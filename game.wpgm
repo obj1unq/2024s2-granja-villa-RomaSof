@@ -10,8 +10,13 @@ program farmville {
 	game.ground("ground.png")
 
 	//  VISUALES
- 	game.addVisualCharacter(hector)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
+ 	game.addVisualCharacter(hector) //Para que se pueda mover con las flechas default
+	
+	//controles (los cambio por comodidad)
+	keyboard.q().onPressDo({hector.sembrar( new Corn() )}) 
+	keyboard.w().onPressDo({hector.sembrar( new Wheat() )})
+	keyboard.e().onPressDo({hector.sembrar( new Tomaco() )})
+	keyboard.r().onPressDo({hector.regar()})
  	
  	//  COMIENZA
 	game.start()
