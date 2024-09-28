@@ -6,6 +6,7 @@ object hector {
 	const property image = "player.png"
 	var property ganancias = 0 
 	const property cosecha = #{}
+	
 
 	method sembrar(planta) {
 	  self.validarSembrar()
@@ -64,6 +65,12 @@ object hector {
 
 	method mensajeADecir() {
 	return "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender "
+	}
+
+	//bonus
+	method dejarAspersor(aspersor) {
+	  //self.validarDejarAspersor()
+	  aspersor.position(self)
 	}
 
 }

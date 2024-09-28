@@ -1,6 +1,8 @@
 import wollok.game.*
 import hector.*
 import cultivos.*
+import cosasGranja.*
+
 
 program farmville {
 	//  CONFIG	
@@ -20,6 +22,9 @@ program farmville {
 	keyboard.c().onPressDo({hector.cosechar()})
 	keyboard.v().onPressDo({hector.vender()})
 	keyboard.space().onPressDo({hector.hablar()})
+
+	//bonus
+	keyboard.a().onPressDo({hector.dejarAspersor( new Aspersor() )})
  	
  	//  COMIENZA
 	game.start()
