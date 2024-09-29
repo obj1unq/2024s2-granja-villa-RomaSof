@@ -1,3 +1,4 @@
+import cosasGranja.*
 import wollok.game.*
 
 
@@ -49,11 +50,12 @@ object hector {
 
 	method vender() {
 		self.validarVenta()
-	  ganancias = cosecha.map({planta => planta.precio()}).sum()
+		game.uniqueCollider(self).recibirMercaderia(self)
+	  //ganancias = cosecha.map({planta => planta.precio()}).sum()
 	}
 
 	method validarVenta() {
-	  if (cosecha.isEmpty()){
+	  if (not cosecha.isEmpty() and game.uniqueCollider(self) == Aspersor ){
 		self.error("no tengo nada para vender")
 	  }
 	}
@@ -62,14 +64,16 @@ object hector {
 	  game.say(self, "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender ")
 	}
 
-	/*method mensajeADecir() {
-	return "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender "
-	}*/
-
 	//bonus
 	method dejarAspersor(aspersor) {
-	  //self.validarDejarAspersor() hace falta? importa?
+	  self.validarDejarAspersor()
 	  aspersor.position(self)
+	}
+
+	method validarDejarAspersor() {
+	  if (not self.esEspacioVacio()){
+		self.error("no puedo dejar un aspersor aquí")
+	  }
 	}
 
 }

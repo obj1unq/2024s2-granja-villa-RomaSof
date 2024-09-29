@@ -4,27 +4,36 @@ import wollok.game.*
 class Aspersor{
 
     var property position = null
+    var property image = "aspersor.png"
 
     method position(sembrador) {
         position = sembrador.position()
-        game.addVisualCharacter( new Aspersor() )
+        game.addVisualCharacter( self )
+        self.regar()
     }
 
-    method regar() {
-        game.onTick(1000, self, {self.regarPlantasCercanas()})
+    method regar() { //1000
+        game.onTick(999, self, {self.regarPlantasCercanas()})
     }
 
     method regarPlantasCercanas() {
-      game.getObjectsIn(position.up(1)).regar()
-      game.getObjectsIn(position.right(1)).regar()
-      game.getObjectsIn(position.down(1)).regar()
-      game.getObjectsIn(position.left(1)).regar()     
+      //const positionNow = self.position()
+      game.getObjectsIn(position.up(1)).forEach({planta => planta.crecer()})
+      game.getObjectsIn(position.right(1)).forEach({planta => planta.crecer()})
+      game.getObjectsIn(position.down(1)).forEach({planta => planta.crecer()})
+      game.getObjectsIn(position.left(1)).forEach({planta => planta.crecer()})
     }
 /*
-game.getObjectsIn( game.at(self.position().x() + 1, self.position().y()) ).regar()    
-game.getObjectsIn( game.at(self.position().x() - 1, self.position().y()) ).regar()
-game.getObjectsIn( game.at(self.position().x(), self.position().y() + 1) ).regar()
-game.getObjectsIn( game.at(self.position().x(), self.position().y() - 1) ).regar()
+game.getObjectsIn( game.at(self.position().x() + 1, self.position().y()) ).crecer()
+game.getObjectsIn( game.at(self.position().x() - 1, self.position().y()) ).crecer()
+game.getObjectsIn( game.at(self.position().x(), self.position().y() + 1) ).crecer()
+game.getObjectsIn( game.at(self.position().x(), self.position().y() - 1) ).crecer()
+*/
+/*
+game.getObjectsIn(position.up(1)).crecer()
+game.getObjectsIn(position.right(1)).crecer()
+game.getObjectsIn(position.down(1)).crecer()
+game.getObjectsIn(position.left(1)).crecer()
 */
 }
 
@@ -32,14 +41,29 @@ class Mercado {
 
   var property position = null
   const property image = "market.png"
-  var property cantidadMonedas = null
-  var property mercaderia = #{}
+  var property cajaMercado = null
+  const property mercaderia = #{}
+
+  method recibirMercaderia(vendedor) {
+    cajaMercado = self.valorDeCosecha(vendedor)
+    self.pagar(vendedor)
+    mercaderia.add(vendedor.cosecha())
+    vendedor.mercaderia(#{})
+    self.venderMercaderia()
+  }
+
+  method pagar(vendedor) {
+    cajaMercado = cajaMercado - self.valorDeCosecha(vendedor)
+    vendedor.ganancias(self.valorDeCosecha(vendedor))
+  }
+
+  method valorDeCosecha(propietario) {
+    return propietario.cosecha().map({planta => planta.precio()}).sum()
+  }
+
+  method venderMercaderia() {
+    cajaMercado = self.valorDeCosecha(self)
+
+  }
 
 }
-
-
-/*
-para mercado
-   * Returns the unique object that is in same position of given object.
-   */  
-  //method uniqueCollider(visual) = self.colliders(visual).uniqueElement()
