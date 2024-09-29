@@ -23,7 +23,7 @@ class Aspersor{
       }
     }
 
-    method hayPlantasCercanar() {
+    method hayPlantasCercanar() { con un regar si es planta?
       return not (
         game.getObjectsIn(position.up(1)).isEmpty()     and
         game.getObjectsIn(position.right(1)).isEmpty()  and
@@ -53,7 +53,7 @@ class Mercado {
     self.pagar(vendedor)
     mercaderia.add(vendedor.cosecha())
     vendedor.mercaderia(#{})
-  //  self.venderMercaderia() no es necesario
+  //  self.venderMercaderia() no sé si debería simular la venta
   }
 
   method pagar(vendedor) {

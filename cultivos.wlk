@@ -81,27 +81,15 @@ class Corn {
 		position = sembrador.position() 
 		game.addVisualCharacter( self )
 	}
-	//no sé hacer que salga corriendo :(
+
 	method crecer() {
 	  vecesRegada = vecesRegada + 1
+	  image = "tomaco.png"
 	  self.madurar()
-	  //self.madurarOCorrer()
-	}
-/*
-	method madurarOCorrer() {
-	  if(vecesRegada > 1){
-		self.correr()
-	  } else {
-		self.madurar()
-	  }
 	}
 
-	method correr() { 
-	  //self.position()+1.y().max(10)
-	}
-*/
 	method madurar() {
-	  image = "tomaco.png" //supongo que tiene que correr cunado ya esta maduro y lo siguen regando porque existe tomaco adulto
+	  position = game.at(self.position().x(), self.position().y()+1)
 	}
 
 	method serCosechado() {

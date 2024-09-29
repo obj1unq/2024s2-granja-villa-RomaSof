@@ -1,3 +1,20 @@
 import hector.*
+import cosasGranja.*
+import cultivos.*
 
-//describe "hector" {}
+
+
+describe "hector" {
+
+    test "venta" {
+        const mercado = new Mercado( position = 0, cajaMercado = 500 ) //corn 150
+        //const corn1 = new Corn( position = 0 )
+        //const corn2 = new Corn( position = 0 )
+
+
+        assert.equals("cosasGranja.Mercado", mercado.className() )
+        //assert.equals(300, hector.ganancias())
+        
+    } 
+
+}

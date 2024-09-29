@@ -53,8 +53,8 @@ object hector {
 	}
 
 	method validarVenta() {
-	  if (game.uniqueCollider(self).className() == "Aspersor"){ //not cosecha.isEmpty() and 
-		self.error("no puedo vender")
+	  if (self.esEspacioVacio() and game.uniqueCollider(self).className() != "cosasGranja.Mercado"){
+		self.error("solo puedo vender en un mercado")
 	  }
 	}
 
@@ -64,7 +64,7 @@ object hector {
 
 	method hablar() {
 	  game.say(self, "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender ")
-	}
+	} //a veces el hablar no anda y no sé por qué
 
 	//bonus
 	method dejarAspersor(aspersor) {
