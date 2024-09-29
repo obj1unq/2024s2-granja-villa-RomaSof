@@ -55,7 +55,7 @@ class Corn {
 	}
 	
 	method madurar() {
-	  madurez = if (madurez <= 2) (madurez + 1) else 3 //note to self : era un error matemático no de codigo, tiene que ser mayor o igual a 2 o sino siempre es 3 el resu para no pasarse de la maduración máxima.
+	  madurez = if (madurez <= 2) (madurez + 1) else 3
 	}
 
 	method serCosechado() {

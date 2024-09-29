@@ -59,17 +59,16 @@ object hector {
 	}
 
 	method hablar() {
-	  game.say(self, self.mensajeADecir())
-	  //"tengo" + ganancias "monedas y" + cosecha.size() + "plantas para vender"  
+	  game.say(self, "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender ")
 	}
 
-	method mensajeADecir() {
+	/*method mensajeADecir() {
 	return "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender "
-	}
+	}*/
 
 	//bonus
 	method dejarAspersor(aspersor) {
-	  //self.validarDejarAspersor()
+	  //self.validarDejarAspersor() hace falta? importa?
 	  aspersor.position(self)
 	}
 

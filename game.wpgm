@@ -13,6 +13,7 @@ program farmville {
 
 	//  VISUALES
  	game.addVisualCharacter(hector) //Para que se pueda mover con las flechas default
+	game.addVisual( new Mercado( position = game.at(9,9) ) )
 	
 	//controles (los cambio por comodidad)
 	keyboard.q().onPressDo({hector.sembrar( new Corn() )}) 
@@ -26,6 +27,6 @@ program farmville {
 	//bonus
 	keyboard.a().onPressDo({hector.dejarAspersor( new Aspersor() )})
  	
- 	//  COMIENZA
+ 	//COMIENZA
 	game.start()
 }

@@ -7,36 +7,39 @@ class Aspersor{
 
     method position(sembrador) {
         position = sembrador.position()
-        game.addVisualCharacter( self )
+        game.addVisualCharacter( new Aspersor() )
     }
 
     method regar() {
-      self.regarAl("up")
-      self.regarAl("right")
-      self.regarAl("down")
-      self.regarAl("left")
-
+        game.onTick(1000, self, {self.regarPlantasCercanas()})
     }
 
-    method regarAl(direction) {
-      game.getObjectsIn(self.positionLimitrofe(direction)).regar()
+    method regarPlantasCercanas() {
+      game.getObjectsIn(position.up(1)).regar()
+      game.getObjectsIn(position.right(1)).regar()
+      game.getObjectsIn(position.down(1)).regar()
+      game.getObjectsIn(position.left(1)).regar()     
     }
-    //game.getObjectsIn(self.positionLimitrofe("right")).regar()
+/*
+game.getObjectsIn( game.at(self.position().x() + 1, self.position().y()) ).regar()    
+game.getObjectsIn( game.at(self.position().x() - 1, self.position().y()) ).regar()
+game.getObjectsIn( game.at(self.position().x(), self.position().y() + 1) ).regar()
+game.getObjectsIn( game.at(self.position().x(), self.position().y() - 1) ).regar()
+*/
+}
 
-    method positionLimitrofe(direction) {
-      return self.position().x().direction(1)
-    }
+class Mercado {
+
+  var property position = null
+  const property image = "market.png"
+  var property cantidadMonedas = null
+  var property mercaderia = #{}
 
 }
 
-/*//game.getObjectsIn(game.right(1))
-      const derecha = self.position().x().right(1)
-* Returns a new Position n steps right from this one.
-      //self.position().withX(self.position().x() + 1)
-      //position(self.position().x() + 1, self.position().y())
-      //position(self.position().x() + 1, self.position().y())
-      game.getObjectsIn( derecha )
-      //self.position().x()+1, self.position().y()
-*/
 
-
+/*
+para mercado
+   * Returns the unique object that is in same position of given object.
+   */  
+  //method uniqueCollider(visual) = self.colliders(visual).uniqueElement()
