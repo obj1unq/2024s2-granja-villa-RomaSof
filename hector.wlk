@@ -15,7 +15,7 @@ object hector {
 	}
 
 	method validarSembrar() {
-	  if( not self.esEspacioVacio() ){
+	  if(not self.esEspacioVacio()){
 		self.error("no se puede sembrar aquí")
 	  }
 	}
@@ -39,7 +39,6 @@ object hector {
 	  self.validarCosechar()
 	  cosecha.add(game.uniqueCollider(self))
 	  game.uniqueCollider(self).serCosechado()
-	  //game.removeVisual(game.uniqueCollider(self)) es responsabilidad de hector o la planta?
 	}
 
 	method validarCosechar() {
@@ -51,13 +50,16 @@ object hector {
 	method vender() {
 		self.validarVenta()
 		game.uniqueCollider(self).recibirMercaderia(self)
-	  //ganancias = cosecha.map({planta => planta.precio()}).sum()
 	}
 
 	method validarVenta() {
-	  if (not cosecha.isEmpty() and game.uniqueCollider(self) == Aspersor ){
-		self.error("no tengo nada para vender")
+	  if (game.uniqueCollider(self).className() == "Aspersor"){ //not cosecha.isEmpty() and 
+		self.error("no puedo vender")
 	  }
+	}
+
+	method cobrar(monto) {
+	  ganancias = ganancias + monto
 	}
 
 	method hablar() {
@@ -71,7 +73,7 @@ object hector {
 	}
 
 	method validarDejarAspersor() {
-	  if (not self.esEspacioVacio()){
+	  if (not self.esEspacioVacio()){ //podría agregarle más requisitos para agregar el aspersor?
 		self.error("no puedo dejar un aspersor aquí")
 	  }
 	}

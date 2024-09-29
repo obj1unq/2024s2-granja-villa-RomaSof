@@ -12,29 +12,33 @@ class Aspersor{
         self.regar()
     }
 
-    method regar() { //1000
-        game.onTick(999, self, {self.regarPlantasCercanas()})
+    method regar() {
+      //self.validarRegar() ¿cómo evitar que riegue cosas que no son plantas?
+      game.onTick(1000, self, {self.regarPlantasCercanas()})
+    }
+/*
+    method validarRegar() { 
+      if(not self.hayPlantasCercanar()){
+        self.error("faltan plantas para regar")
+      }
     }
 
+    method hayPlantasCercanar() {
+      return not (
+        game.getObjectsIn(position.up(1)).isEmpty()     and
+        game.getObjectsIn(position.right(1)).isEmpty()  and
+        game.getObjectsIn(position.down(1)).isEmpty()   and
+        game.getObjectsIn(position.left(1)).isEmpty() 
+      )
+    }
+*/
     method regarPlantasCercanas() {
-      //const positionNow = self.position()
       game.getObjectsIn(position.up(1)).forEach({planta => planta.crecer()})
       game.getObjectsIn(position.right(1)).forEach({planta => planta.crecer()})
       game.getObjectsIn(position.down(1)).forEach({planta => planta.crecer()})
       game.getObjectsIn(position.left(1)).forEach({planta => planta.crecer()})
     }
-/*
-game.getObjectsIn( game.at(self.position().x() + 1, self.position().y()) ).crecer()
-game.getObjectsIn( game.at(self.position().x() - 1, self.position().y()) ).crecer()
-game.getObjectsIn( game.at(self.position().x(), self.position().y() + 1) ).crecer()
-game.getObjectsIn( game.at(self.position().x(), self.position().y() - 1) ).crecer()
-*/
-/*
-game.getObjectsIn(position.up(1)).crecer()
-game.getObjectsIn(position.right(1)).crecer()
-game.getObjectsIn(position.down(1)).crecer()
-game.getObjectsIn(position.left(1)).crecer()
-*/
+
 }
 
 class Mercado {
@@ -45,25 +49,24 @@ class Mercado {
   const property mercaderia = #{}
 
   method recibirMercaderia(vendedor) {
-    cajaMercado = self.valorDeCosecha(vendedor)
+    cajaMercado = self.valorDeCosecha(vendedor) //para que siempre tenga plata para pagarle al que vende
     self.pagar(vendedor)
     mercaderia.add(vendedor.cosecha())
     vendedor.mercaderia(#{})
-    self.venderMercaderia()
+  //  self.venderMercaderia() no es necesario
   }
 
   method pagar(vendedor) {
     cajaMercado = cajaMercado - self.valorDeCosecha(vendedor)
-    vendedor.ganancias(self.valorDeCosecha(vendedor))
+    vendedor.cobrar(self.valorDeCosecha(vendedor))
   }
 
   method valorDeCosecha(propietario) {
-    return propietario.cosecha().map({planta => planta.precio()}).sum()
+    return  propietario.cosecha().map({planta => planta.precio()}).sum()
   }
-
+/*
   method venderMercaderia() {
     cajaMercado = self.valorDeCosecha(self)
-
   }
-
+*/
 }

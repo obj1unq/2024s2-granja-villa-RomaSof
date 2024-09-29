@@ -10,10 +10,6 @@ class Corn {
 		game.addVisualCharacter( self ) //este self sería siempre una nueva planta
 	}
 
-	/*
-	por lo que entiendo es que cada clase cuando se va a plantar se referencia a agregarse a sí misma, pero para usarse y agregarse se la va a tener que usar en un "objeto" que se crea con el new Planta() entondes ese self es al objeto y nunca a la clase y por eso funciona?
-	*/
-
 	method crecer() {
 	  image = "corn_adult.png"
 	}
@@ -85,7 +81,7 @@ class Corn {
 		position = sembrador.position() 
 		game.addVisualCharacter( self )
 	}
-	//no me sale hacer que salga corriendo :(
+	//no sé hacer que salga corriendo :(
 	method crecer() {
 	  vecesRegada = vecesRegada + 1
 	  self.madurar()
