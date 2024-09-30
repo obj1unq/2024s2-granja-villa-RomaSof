@@ -4,16 +4,47 @@ import cultivos.*
 
 
 
-describe "hector" {
+describe "hector, plantas y cosas" {
 
-    test "venta" {
-        const mercado = new Mercado( position = 0, cajaMercado = 500 ) //corn 150
-        //const corn1 = new Corn( position = 0 )
-        //const corn2 = new Corn( position = 0 )
+    const mercado = new Mercado( position = 0, cajaMercado = 500 )
+    const corn1 = new Corn( position = 0 )
+    const corn2 = new Corn( position = 0 )
+    const wheat1 = new Wheat( position = 0 )
 
+    test "regar" {
+      hector.regar(corn1)
+      hector.regar(wheat1)
 
+      assert.that(corn1.image() == "corn_adult.png")
+      assert.equals(wheat1.madurez(), 1)
+
+      hector.regar(wheat1)
+      assert.equals(wheat1.madurez(), 2)
+
+    }
+
+    test "cosechar" {
+        hector.regar(corn1)
+        hector.regar(corn2)
+
+        hector.cosechar(corn1)
+        hector.cosechar(corn2)
+
+      assert.equals(hector.cosecha(), #{corn1, corn2})
+      assert.throwsException({ hector.cosechar(wheat1) })
+    }
+    
+    test "vender" {
+        hector.regar(corn1)
+        hector.regar(corn2)
+        hector.cosechar(corn1)
+        hector.cosechar(corn2)
+        hector.vender(mercado)
+        
+
+        assert.equals(300, hector.ganancias())
         assert.equals("cosasGranja.Mercado", mercado.className() )
-        //assert.equals(300, hector.ganancias())
+        assert.equals(mercado.mercaderia(), #{corn1, corn2})
         
     } 
 

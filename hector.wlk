@@ -24,35 +24,48 @@ object hector {
 	  return game.colliders(self).isEmpty()
 	}
 
-	method regar() {
-	  self.validarRegar()
-	  game.uniqueCollider(self).crecer()
+	method regar(planta) {
+	  planta.crecer()
 	}
 
-	method validarRegar() {
+	method regarAqui() {
+		self.validarRegarAqui()
+		self.regar(game.uniqueCollider(self))
+	}
+
+	method validarRegarAqui() {
 	  if (self.esEspacioVacio()){
 		self.error("no tengo nada para regar")
 	  }
 	}
 
-	method cosechar() {
-	  self.validarCosechar()
-	  cosecha.add(game.uniqueCollider(self))
-	  game.uniqueCollider(self).serCosechado()
+	method cosechar(planta) {
+	  cosecha.add(planta)
+	  planta.serCosechado()
 	}
 
-	method validarCosechar() {
+	method cosecharAqui() {
+		self.validarCosecharAqui()
+		self.cosechar(game.uniqueCollider(self))
+	}
+
+	method validarCosecharAqui() {
 	  if (self.esEspacioVacio()){
 		self.error("no tengo nada para cosechar")
 	  }
 	}
 
-	method vender() {
-		self.validarVenta()
-		game.uniqueCollider(self).recibirMercaderia(self)
+	method vender(mercado) {
+		mercado.recibirMercaderia(self)
+		cosecha.clear()
 	}
 
-	method validarVenta() {
+	method venderAqui() {
+	  self.validarVentaAqui()
+	  self.vender(game.uniqueCollider(self))
+	}
+
+	method validarVentaAqui() {
 	  if (self.esEspacioVacio() and game.uniqueCollider(self).className() != "cosasGranja.Mercado"){
 		self.error("solo puedo vender en un mercado")
 	  }

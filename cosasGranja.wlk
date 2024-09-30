@@ -51,8 +51,7 @@ class Mercado {
   method recibirMercaderia(vendedor) {
     cajaMercado = self.valorDeCosecha(vendedor) //para que siempre tenga plata para pagarle al que vende
     self.pagar(vendedor)
-    mercaderia.add(vendedor.cosecha())
-    vendedor.mercaderia(#{})
+    mercaderia.addAll(vendedor.cosecha())
   //  self.venderMercaderia() no sé si debería simular la venta
   }
 
