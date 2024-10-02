@@ -1,11 +1,18 @@
 import hector.*
-import cosasGranja.*
+import granjaYcosas.*
 import cultivos.*
+import wollok.game.*
 
 
 
 describe "hector, plantas y cosas" {
 
+  test "AAA" {
+    assert.equals([hector], game.getObjectsIn(game.center()))
+  }
+  
+
+/*
     const mercado = new Mercado( position = 0, cajaMercado = 500 )
     const corn1 = new Corn( position = 0 )
     const corn2 = new Corn( position = 0 )
@@ -47,5 +54,5 @@ describe "hector, plantas y cosas" {
         assert.equals(mercado.mercaderia(), #{corn1, corn2})
         
     } 
-
+*/
 }

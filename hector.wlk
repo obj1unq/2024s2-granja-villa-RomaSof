@@ -1,4 +1,6 @@
 import granjaYcosas.*
+import cultivos.*
+
 import wollok.game.*
 
 
@@ -10,15 +12,37 @@ object hector {
 	
 
 	method sembrar(planta) {
-	  granja.agregarACultivo(self, planta)
+		self.validarSembrar(self.position())
+		granja.agregarACultivo(self, planta)
+	}
+
+	method validarSembrar(parcela) {
+	  if(not granja.esEspacioVacio(parcela)){
+		self.error("no se puede sembrar aquí")
+	  }
 	}
 
 	method regar() {
+	  self.validarRegar(self.position())
 	  granja.regarAqui(self)
+	}
+	//validar regar debería decirte si hay una planta en la lista con la misma posicion en la que etsá el granjero y además devolderte la plata con otro metodo
+	method validarRegar(parcela) {
+	  if (not granja.hayPlantasEnParcelaEn(parcela)){
+		self.error("no hay nada para regar")
+	  }
 	}
 
 	method cosechar() {
+	  self.validareliminarDeCultivos(self.position())
+	  cosecha.add(granja.primeraPlantaEn(self.position()))
 	  granja.eliminarDeCultivos(self)
+	}
+	
+	method validareliminarDeCultivos(parcela) {
+		if (not granja.hayPlantasEnParcelaEn(parcela)){
+		self.error("no hay plantas para eliminar")
+		}
 	}
 
 	method vender(mercado) {
@@ -47,7 +71,14 @@ object hector {
 
 	//bonus
 	method dejarAspersor(aspersor) {
-	  granja.dejarAspersorAqui(self)
+		self.validarDejarAspersorAqui(self.position())
+		granja.dejarAspersorAqui(self)
+	}
+
+	method validarDejarAspersorAqui(parcela) {
+	  if (not granja.esEspacioVacio(parcela)){ 
+		self.error("no puedo dejar un aspersor aquí")
+	  }
 	}
 
 }
