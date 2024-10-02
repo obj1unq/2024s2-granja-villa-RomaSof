@@ -1,4 +1,4 @@
-import cosasGranja.*
+import granjaYcosas.*
 import wollok.game.*
 
 
@@ -10,49 +10,15 @@ object hector {
 	
 
 	method sembrar(planta) {
-	  self.validarSembrar()
-	  planta.position(self)
+	  granja.agregarACultivo(self, planta)
 	}
 
-	method validarSembrar() {
-	  if(not self.esEspacioVacio()){
-		self.error("no se puede sembrar aquí")
-	  }
+	method regar() {
+	  granja.regarAqui(self)
 	}
 
-	method esEspacioVacio() {
-	  return game.colliders(self).isEmpty()
-	}
-
-	method regar(planta) {
-	  planta.crecer()
-	}
-
-	method regarAqui() {
-		self.validarRegarAqui()
-		self.regar(game.uniqueCollider(self))
-	}
-
-	method validarRegarAqui() {
-	  if (self.esEspacioVacio()){
-		self.error("no tengo nada para regar")
-	  }
-	}
-
-	method cosechar(planta) {
-	  cosecha.add(planta)
-	  planta.serCosechado()
-	}
-
-	method cosecharAqui() {
-		self.validarCosecharAqui()
-		self.cosechar(game.uniqueCollider(self))
-	}
-
-	method validarCosecharAqui() {
-	  if (self.esEspacioVacio()){
-		self.error("no tengo nada para cosechar")
-	  }
+	method cosechar() {
+	  granja.eliminarDeCultivos(self)
 	}
 
 	method vender(mercado) {
@@ -62,11 +28,11 @@ object hector {
 
 	method venderAqui() {
 	  self.validarVentaAqui()
-	  self.vender(game.uniqueCollider(self))
+	  self.vender(granja.primerMercadoAqui(self))
 	}
 
 	method validarVentaAqui() {
-	  if (self.esEspacioVacio() and game.uniqueCollider(self).className() != "cosasGranja.Mercado"){
+	  if (not granja.hayMercadoAqui(self)){
 		self.error("solo puedo vender en un mercado")
 	  }
 	}
@@ -81,14 +47,7 @@ object hector {
 
 	//bonus
 	method dejarAspersor(aspersor) {
-	  self.validarDejarAspersor()
-	  aspersor.position(self)
-	}
-
-	method validarDejarAspersor() {
-	  if (not self.esEspacioVacio()){ //podría agregarle más requisitos para agregar el aspersor?
-		self.error("no puedo dejar un aspersor aquí")
-	  }
+	  granja.dejarAspersorAqui(self)
 	}
 
 }
