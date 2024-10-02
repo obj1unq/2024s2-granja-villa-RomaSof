@@ -7,12 +7,14 @@ import wollok.game.*
 
 describe "hector, plantas y cosas" {
 
-  test "AAA" {
+  test "prueba objetos es posicion dada" {
+    assert.equals([mercado1], game.getObjectsIn(game.at(9,9)))
     assert.equals([hector], game.getObjectsIn(game.center()))
   }
   
 
 /*
+//cambie el codigo asi que tengo que cambiar los tests después
     const mercado = new Mercado( position = 0, cajaMercado = 500 )
     const corn1 = new Corn( position = 0 )
     const corn2 = new Corn( position = 0 )
