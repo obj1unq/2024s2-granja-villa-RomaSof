@@ -13,34 +13,34 @@ object hector {
 
 	method sembrar(planta) {
 		self.validarSembrar()
-		granja.agregarACultivo(self.position(), planta)
+		granja.agregarACultivo(position, planta)
 	}
 
 	method validarSembrar() {
-	  if(not granja.esEspacioVacio(self.position())){
+	  if(not granja.esEspacioVacio(position)){
 		self.error("no se puede sembrar aquí")
 	  }
 	}
 
 	method regar() {
-	  self.validarRegar(self.position())
+	  self.validarRegar(position)
 	  granja.regarAqui(self)
 	}
-	//validar regar debería decirte si hay una planta en la lista con la misma posicion en la que está el granjero
-	method validarRegar(parcela) {
-	  if (not granja.hayPlantasAqui(parcela)){
+
+	method validarRegar(_position) {
+	  if (not granja.hayPlantasAqui(_position)){
 		self.error("no hay nada para regar")
 	  }
 	}
 
 	method cosechar() {
-	  self.validareliminarDeCultivos(self.position())
-	  cosecha.add(granja.primeraPlantaEn(self.position()))
-	  granja.eliminarDeCultivos(self)
+	  self.validareCosecharEn(position)
+	  cosecha.add(granja.primeraPlantaEn(position))
+	  granja.eliminarDeCultivos(granja.primeraPlantaEn(position))
 	}
 	
-	method validareliminarDeCultivos(parcela) {
-		if (not granja.hayPlantasAqui(parcela)){
+	method validareCosecharEn(_position) {
+		if (not granja.hayPlantasAqui(_position)){
 		self.error("no hay plantas para eliminar")
 		}
 	}
@@ -52,11 +52,11 @@ object hector {
 
 	method venderAqui() {
 	  self.validarVentaAqui()
-	  self.vender(granja.primerMercadoAqui(self.position()))
+	  self.vender(granja.primerMercadoAqui(position))
 	}
 
 	method validarVentaAqui() {
-	  if (not granja.hayMercadosAqui(self.position())){
+	  if (not granja.hayMercadosAqui(position)){
 		self.error("solo puedo vender en un mercado")
 	  }
 	}
@@ -67,12 +67,12 @@ object hector {
 
 	method hablar() {
 	  game.say(self, "tengo " + ganancias + " monedas y " + cosecha.size() + " plantas para vender ")
-	} //a veces el hablar no anda y no sé por qué
+	} 
 
 	//bonus
 	method dejarAspersor(aspersor) {
-		self.validarDejarAspersorAqui(self.position())
-		granja.dejarAspersorAqui(self.position(), aspersor)
+		self.validarDejarAspersorAqui(position)
+		granja.dejarAspersorAqui(position, aspersor)
 	}
 
 	method validarDejarAspersorAqui(_position) {
