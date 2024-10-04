@@ -5,19 +5,19 @@ import wollok.game.*
 
 
 object hector {
-	var property position = game.center()
+	var property position = game.at(0,0)
 	const property image = "player.png"
 	var property ganancias = 0 
 	const property cosecha = #{}
 	
 
 	method sembrar(planta) {
-		self.validarSembrar(self.position())
-		granja.agregarACultivo(self, planta)
+		self.validarSembrar()
+		granja.agregarACultivo(self.position(), planta)
 	}
 
-	method validarSembrar(parcela) {
-	  if(not granja.esEspacioVacio(parcela)){
+	method validarSembrar() {
+	  if(not granja.esEspacioVacio(self.position())){
 		self.error("no se puede sembrar aquí")
 	  }
 	}
@@ -26,9 +26,9 @@ object hector {
 	  self.validarRegar(self.position())
 	  granja.regarAqui(self)
 	}
-	//validar regar debería decirte si hay una planta en la lista con la misma posicion en la que etsá el granjero y además devolderte la plata con otro metodo
+	//validar regar debería decirte si hay una planta en la lista con la misma posicion en la que está el granjero
 	method validarRegar(parcela) {
-	  if (not granja.hayPlantasEnParcelaEn(parcela)){
+	  if (not granja.hayPlantasAqui(parcela)){
 		self.error("no hay nada para regar")
 	  }
 	}
@@ -40,7 +40,7 @@ object hector {
 	}
 	
 	method validareliminarDeCultivos(parcela) {
-		if (not granja.hayPlantasEnParcelaEn(parcela)){
+		if (not granja.hayPlantasAqui(parcela)){
 		self.error("no hay plantas para eliminar")
 		}
 	}
@@ -52,11 +52,11 @@ object hector {
 
 	method venderAqui() {
 	  self.validarVentaAqui()
-	  self.vender(granja.primerMercadoAqui(self))
+	  self.vender(granja.primerMercadoAqui(self.position()))
 	}
 
 	method validarVentaAqui() {
-	  if (not granja.hayMercadoAqui(self)){
+	  if (not granja.hayMercadosAqui(self.position())){
 		self.error("solo puedo vender en un mercado")
 	  }
 	}
@@ -72,11 +72,11 @@ object hector {
 	//bonus
 	method dejarAspersor(aspersor) {
 		self.validarDejarAspersorAqui(self.position())
-		granja.dejarAspersorAqui(self)
+		granja.dejarAspersorAqui(self.position(), aspersor)
 	}
 
-	method validarDejarAspersorAqui(parcela) {
-	  if (not granja.esEspacioVacio(parcela)){ 
+	method validarDejarAspersorAqui(_position) {
+	  if (not granja.esEspacioVacio(_position)){ 
 		self.error("no puedo dejar un aspersor aquí")
 	  }
 	}

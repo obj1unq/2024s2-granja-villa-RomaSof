@@ -5,56 +5,14 @@ import wollok.game.*
 
 
 
-describe "hector, plantas y cosas" {
+describe "hector, granja, plantas y cosas" {
 
-  test "prueba objetos es posicion dada" {
-    assert.equals([mercado1], game.getObjectsIn(game.at(9,9)))
-    assert.equals([hector], game.getObjectsIn(game.center()))
+  method initialize(){
+    game.height(10)
+    game.width(10)
+    game.addVisualCharacter(hector)
+	  game.addVisual( mercado1 )
   }
+
   
-
-/*
-//cambie el codigo asi que tengo que cambiar los tests después
-    const mercado = new Mercado( position = 0, cajaMercado = 500 )
-    const corn1 = new Corn( position = 0 )
-    const corn2 = new Corn( position = 0 )
-    const wheat1 = new Wheat( position = 0 )
-
-    test "regar" {
-      hector.regar(corn1)
-      hector.regar(wheat1)
-
-      assert.that(corn1.image() == "corn_adult.png")
-      assert.equals(wheat1.madurez(), 1)
-
-      hector.regar(wheat1)
-      assert.equals(wheat1.madurez(), 2)
-
-    }
-
-    test "cosechar" {
-        hector.regar(corn1)
-        hector.regar(corn2)
-
-        hector.cosechar(corn1)
-        hector.cosechar(corn2)
-
-      assert.equals(hector.cosecha(), #{corn1, corn2})
-      assert.throwsException({ hector.cosechar(wheat1) })
-    }
-    
-    test "vender" {
-        hector.regar(corn1)
-        hector.regar(corn2)
-        hector.cosechar(corn1)
-        hector.cosechar(corn2)
-        hector.vender(mercado)
-        
-
-        assert.equals(300, hector.ganancias())
-        assert.equals("cosasGranja.Mercado", mercado.className() )
-        assert.equals(mercado.mercaderia(), #{corn1, corn2})
-        
-    } 
-*/
 }

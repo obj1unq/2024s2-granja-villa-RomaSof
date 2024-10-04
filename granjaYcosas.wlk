@@ -13,71 +13,72 @@ object granja {
   const property construcciones = #{mercado1, mercado2}
 
   //sembrar:
-  method agregarACultivo(granjero, planta) {
-    planta.position(granjero)
+  method agregarACultivo(position, planta) {
+    planta.position(position)
     cultivos.add(planta)
   }
 
-  method esEspacioVacio(position) {
-	  return game.getObjectsIn(position).isEmpty()
-    //game.colliders(hector).isEmpty() //sino no anda
+  method esEspacioVacio(position) { //solo anda con colliders igual
+    return not self.hayPlantasAqui(position) and not self.hayMercadosAqui(position)
+      //return cultivos.filter({cultivo => cultivo.position() == granjero.position()}).isEmpty() and 
+      //construcciones.filter({cons => cons.position() == granjero.position()}).isEmpty()
 	}
 
   //regar:
-  method regarAqui(granjero) {
-    self.primeraPlantaEn(granjero.position()).crecer() 
+  method regarAqui(position) {
+    self.primeraPlantaEn(position).crecer() 
   }
 
-  method hayPlantasEnParcelaEn(position) {
+  method hayPlantasAqui(position) {
     //lista de plantas en esa posicion no empty
-    return not self.plantasEnparcelaEn(position).isEmpty()
-    
+    return not self.plantasEnparcelaEn(position).isEmpty()    
   }
 
   method plantasEnparcelaEn(position) {
     //filter de la posicion de plantas en esa posicion -> la planta con la misma position
-    return cultivos.filter({planta => planta.position() == position})
-    
+    return cultivos.filter({planta => planta.position().equals(position)})
   }
-  //ahora siempre hay una sola la planta en la posicion igual
+  //ahora siempre hay una sola la planta en la posicion igual "primera" solo devuelve una cualquiera del ser
   method primeraPlantaEn(position) {
     return self.plantasEnparcelaEn(position).head()
   }
 
   //cosechar
-  method eliminarDeCultivos(granjero) {
-    self.primeraPlantaEn(granjero.position()).serCosechado()
-    cultivos.remove(self.primeraPlantaEn(granjero.position()))
+  method eliminarDeCultivos(position) {
+    cultivos.remove(self.primeraPlantaEn(position))
+    self.primeraPlantaEn(position).serCosechado()
   }
 
 
   //vender
-  method hayMercadoAqui(granjero) {
-    return not self.mercadosAqui(granjero.position()).isEmpty()
+  method hayMercadosAqui(position) {
+    return not self.mercadosAqui(position).isEmpty()
   }
 
   method mercadosAqui(position) {
-    return construcciones.filter({mercado => mercado.position() == position})
+    return construcciones.filter({mercado => mercado.position().equals(position)})
   }
 
-  method primerMercadoAqui(granjero) {
-    return self.mercadosAqui(granjero.position()).head()
+  method primerMercadoAqui(position) {
+    return self.mercadosAqui(position).head()
   }
 
   //dejar aspersor
-  method dejarAspersorAqui(granjero) {
-    Aspersor.position(granjero.position())
+  method dejarAspersorAqui(position, aspersor) {
+    aspersor.position(position)
+    construcciones.add(aspersor)
   }
 
   //aspersor 
   
   //entonces no se van a poder poner aspersores en las esquinas.
   method hayPlantasEnTodasDireccionesDe(position) {
-    return 
-      self.hayPlantasEnParcelaEn(position.up(1))    and
-      self.hayPlantasEnParcelaEn(position.right(1)) and
-      self.hayPlantasEnParcelaEn(position.down(1))  and
-      self.hayPlantasEnParcelaEn(position.left(1))
+    return  (
+              self.hayPlantasAqui(position.up(1))    and
+              self.hayPlantasAqui(position.right(1)) and
+              self.hayPlantasAqui(position.down(1))  and
+              self.hayPlantasAqui(position.left(1))
+            )
   }
 
 }
