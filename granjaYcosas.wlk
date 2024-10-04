@@ -7,6 +7,8 @@ import wollok.game.*
   De la granja se conocen los cultivos sembrados y si hay alguno en una parcela (posición) específica, como también los cultivos de una parcela dada. Además no deberían estár más en la granja una vez cosechados por Hector.
 */
 
+//por alguna razón no se comiteo la última versión todavía. 
+
 object granja {
   
   const property cultivos =  #{}
