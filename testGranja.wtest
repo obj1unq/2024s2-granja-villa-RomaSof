@@ -16,6 +16,7 @@ describe "hector, granja, plantas y cosas" {
     game.width(10)
     game.addVisualCharacter(hector)
 	  game.addVisual( mercado1 )
+    //mercado 1 en (9,9)
   }
 
   test " sembrar " {
@@ -47,7 +48,7 @@ describe "hector, granja, plantas y cosas" {
 
   }
 
-  test "cosechar" {
+  test " cosechar " {
     hector.sembrar(wheat1)
     hector.regar()
 
@@ -58,8 +59,25 @@ describe "hector, granja, plantas y cosas" {
     hector.cosechar()
 
     assert.equals(#{wheat1}, hector.cosecha())
+    assert.equals(#{}, granja.cultivos())
+
+  }
+
+  test " vender " {
+    hector.sembrar(corn1)  //150
+    hector.regar()
+    hector.cosechar()
+    hector.sembrar(corn2)  //150
+    hector.regar()
+    hector.cosechar()
     
-    //assert.equals(#{}, granja.cultivos())
+    assert.equals(#{corn1, corn2}, hector.cosecha())
+    assert.throwsException({hector.venderAqui()})
+
+    hector.position( game.at(9,9) )
+    hector.venderAqui()
+
+    assert.equals(300, hector.ganancias())
 
   }
   

@@ -57,9 +57,9 @@ object granja {
   method mercadosAqui(position) {
     return construcciones.filter({mercado => mercado.position().equals(position)})
   }
-
+ //NO SÉ REALMENTE SI PUEDE HABER MÁS DE UN MERCADO EN EL MISMO LUGAR COMO UNA GALERÍA
   method primerMercadoAqui(position) {
-    return self.mercadosAqui(position).head()
+    return self.mercadosAqui(position).asList().head()
   }
 
   //aspersor
