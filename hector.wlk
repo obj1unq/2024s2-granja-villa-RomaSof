@@ -10,7 +10,6 @@ object hector {
 	var property ganancias = 0 
 	const property cosecha = #{}
 	
-
 	method sembrar(planta) {
 		self.validarSembrar()
 		granja.agregarACultivo(position, planta)

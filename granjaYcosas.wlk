@@ -3,10 +3,6 @@ import cultivos.*
 
 import wollok.game.*
 
-/*
-  De la granja se conocen los cultivos sembrados y si hay alguno en una parcela (posición) específica, como también los cultivos de una parcela dada. Además no deberían estár más en la granja una vez cosechados por Hector.
-*/
-
 object granja {
   
   const property cultivos =  #{}
@@ -16,11 +12,12 @@ object granja {
   //sembrar:
   method agregarACultivo(position, planta) {
     planta.position(position)
+    game.addVisual( planta )
     cultivos.add(planta)
   }
 
   method esEspacioVacio(position) { 
-    return not self.hayPlantasAqui(position) and not self.hayMercadosAqui(position) //and not self.hayCosasDeJardineriaAqui(position) 
+    return not self.hayPlantasAqui(position) and not self.hayMercadosAqui(position) and not self.hayCosasDeJardineriaAqui(position) 
 	}
 
   //regar:
@@ -33,7 +30,8 @@ object granja {
   }
 
   method plantasEnparcelaEn(position) {
-    return cultivos.filter({planta => planta.position().equals(position)})
+    return cultivos.filter({planta => planta.position() == position})
+    //return cultivos.filter({planta => planta.position().equals(position)}) //ERROR HERE
   }
   //ahora siempre hay una sola la planta en la posicion igual "primera" solo devuelve una cualquiera del ser
   method primeraPlantaEn(position) {
@@ -67,7 +65,7 @@ object granja {
     construcciones.add(aspersor)
   }
 
-  method haycosasJardineriaAqui(position) {
+  method hayCosasDeJardineriaAqui(position) {
     return not self.cosasJardineriaAqui(position).isEmpty()
   }
 
@@ -76,12 +74,9 @@ object granja {
   } 
 
   method plantasEnPerimetroDeAspersor(position) {
-    return  (
-              self.plantasEnparcelaEn(position.up(1))     +
-              self.plantasEnparcelaEn(position.right(1))  +
-              self.plantasEnparcelaEn(position.down(1))   +
-              self.plantasEnparcelaEn(position.left(1))
-            )
+    const distanciasARegar= [position.up(1), position.right(1), position.down(1), position.left(1)]
+  return cultivos.filter({cultivo => distanciasARegar.contains(cultivo.position())})
+  //return cultivos.filter({cultivo => cultivo.position() == distanciasAVer})
   }
 
 }

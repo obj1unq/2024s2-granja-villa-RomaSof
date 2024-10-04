@@ -8,11 +8,6 @@ class Corn {
 	var property position = null
 	var property image = "corn_baby.png"
 
-	method position(sembrador) {
-		position = sembrador.position() 
-		game.addVisualCharacter( self ) //este self sería siempre una nueva planta
-	}
-
 	method crecer() {
 	  image = "corn_adult.png"
 	}
@@ -38,11 +33,6 @@ class Corn {
 
 	var property position = null
 	var property madurez = 0
-   
-   method position(sembrador) {
-		position = sembrador.position() 
-		game.addVisualCharacter( self )
-	}
 
 	method image() {
 	  return "wheat_" + madurez + ".png"
@@ -79,11 +69,6 @@ class Corn {
 	var property position = null
 	var property vecesRegada = 0
 	var property image = "tomaco_baby.png"
-   
-   method position(sembrador) {
-		position = sembrador.position() 
-		game.addVisualCharacter( self )
-	}
 
 	method crecer() {
 	  vecesRegada = vecesRegada + 1

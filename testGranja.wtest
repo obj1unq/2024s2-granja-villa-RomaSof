@@ -13,6 +13,5 @@ describe "hector, granja, plantas y cosas" {
     game.addVisualCharacter(hector)
 	  game.addVisual( mercado1 )
   }
-
   
 }
