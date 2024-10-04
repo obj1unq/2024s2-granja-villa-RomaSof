@@ -30,19 +30,22 @@ object granja {
   }
 
   method plantasEnparcelaEn(position) {
-    return cultivos.filter({planta => planta.position() == position})
-    //return cultivos.filter({planta => planta.position().equals(position)}) //ERROR HERE
+    return cultivos.filter({planta => planta.position().equals(position)})
+    // == position
   }
   //ahora siempre hay una sola la planta en la posicion igual "primera" solo devuelve una cualquiera del ser
   method primeraPlantaEn(position) {
-    return self.plantasEnparcelaEn(position).head()
+    return self.plantasEnparcelaEn(position).asList().head()
   }
 
   //cosechar
-  method eliminarDeCultivos(position) { 
-    const planta = self.primeraPlantaEn(position)
+  method eliminarDeCultivos(planta) { 
     cultivos.remove(planta)
     planta.serCosechado()
+  }
+
+  method sePuedeCosecharAqui(position) {
+    return self.hayPlantasAqui(position) and self.primeraPlantaEn(position).puedeSerCosechado()
   }
 
 

@@ -7,11 +7,60 @@ import wollok.game.*
 
 describe "hector, granja, plantas y cosas" {
 
+    const corn1 = new Corn( position = 0) 
+    const corn2 = new Corn( position = 0) 
+    const wheat1 = new Wheat( position = 0) 
+
   method initialize(){
     game.height(10)
     game.width(10)
     game.addVisualCharacter(hector)
 	  game.addVisual( mercado1 )
+  }
+
+  test " sembrar " {
+    hector.sembrar(corn1)
+
+    assert.equals(#{corn1}, granja.cultivos())
+
+    hector.position(  game.at(0,1) )
+    hector.sembrar(corn2)
+
+    assert.equals(#{corn1, corn2}, granja.cultivos())
+
+    assert.throwsException({ hector.sembrar(wheat1) }) //porque ya hay una plantas allí y no acepto 2 plantas en el mismo lugar
+
+  }
+
+  test " regar " {
+    hector.sembrar(corn1)
+    hector.regar()
+
+    assert.equals("corn_adult.png", corn1.image())
+
+    hector.position(  game.at(0,1) )
+    hector.sembrar(wheat1)
+    hector.regar()
+    hector.regar()
+
+    assert.equals(2, wheat1.madurez())
+
+  }
+
+  test "cosechar" {
+    hector.sembrar(wheat1)
+    hector.regar()
+
+    assert.throwsException({ hector.cosechar() })
+
+    hector.regar()
+    hector.regar()
+    hector.cosechar()
+
+    assert.equals(#{wheat1}, hector.cosecha())
+    
+    //assert.equals(#{}, granja.cultivos())
+
   }
   
 }

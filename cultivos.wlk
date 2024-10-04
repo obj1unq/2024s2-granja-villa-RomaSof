@@ -13,14 +13,11 @@ class Corn {
 	}
 
 	method serCosechado() {
-	  self.validarSerCosechado()
 	  game.removeVisual(self)
 	}
 
-	method validarSerCosechado() {
-	  if( image == "corn_baby.png" ){
-		self.error("no estoy listo para ser cocechado")
-	  }
+	method puedeSerCosechado() {
+		return image == "corn_adult.png"
 	}
 
 	method precio() {
@@ -48,14 +45,11 @@ class Corn {
 	}
 
 	method serCosechado() {
-	  self.validarSerCosechado()
 	  game.removeVisual(self)
 	}
 
-	method validarSerCosechado() {
-	  if( madurez < 2 ){
-		self.error("no estoy listo para ser cosechado")
-	  }
+	method puedeSerCosechado() {
+		return madurez > 2
 	}
 
 	method precio() {
@@ -83,6 +77,10 @@ class Corn {
 	method serCosechado() {
 		game.removeVisual(self)
 	}
+
+	method puedeSerCosechado() { 
+		return true 
+	} 
 
 	method precio() {
 	  return 80

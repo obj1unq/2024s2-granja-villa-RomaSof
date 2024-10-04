@@ -23,7 +23,7 @@ object hector {
 
 	method regar() {
 	  self.validarRegar(position)
-	  granja.regarAqui(self)
+	  granja.regarAqui(position)
 	}
 
 	method validarRegar(_position) {
@@ -34,12 +34,13 @@ object hector {
 
 	method cosechar() {
 	  self.validareCosecharEn(position)
-	  cosecha.add(granja.primeraPlantaEn(position))
-	  granja.eliminarDeCultivos(granja.primeraPlantaEn(position))
+	  const planta = granja.primeraPlantaEn(position)
+	  cosecha.add(planta)
+	  granja.eliminarDeCultivos(planta)
 	}
 	
 	method validareCosecharEn(_position) {
-		if (not granja.hayPlantasAqui(_position)){
+		if (not granja.sePuedeCosecharAqui(_position)){
 		self.error("no hay plantas para eliminar")
 		}
 	}
