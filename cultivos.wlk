@@ -1,6 +1,5 @@
 import hector.*
 import granjaYcosas.*
-
 import wollok.game.*
 
 class Corn {

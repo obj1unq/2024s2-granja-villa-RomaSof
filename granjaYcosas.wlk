@@ -1,6 +1,5 @@
 import hector.*
 import cultivos.*
-
 import wollok.game.*
 
 object granja {

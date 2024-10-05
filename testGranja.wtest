@@ -3,8 +3,6 @@ import granjaYcosas.*
 import cultivos.*
 import wollok.game.*
 
-
-
 describe "hector, granja, plantas y cosas" {
 
     const corn1 = new Corn( position = 0) 
@@ -17,7 +15,7 @@ describe "hector, granja, plantas y cosas" {
     game.width(10)
     game.addVisualCharacter(hector)
 	  game.addVisual( mercado1 )
-    //mercado 1 en (9,9)
+    //mercado1 en (9,9)
   }
 
   test " sembrar " {
@@ -30,7 +28,7 @@ describe "hector, granja, plantas y cosas" {
 
     assert.equals(#{corn1, corn2}, granja.cultivos())
 
-    assert.throwsException({ hector.sembrar(wheat1) }) //porque ya hay una plantas allí y no acepto 2 plantas en el mismo lugar
+    assert.throwsException({ hector.sembrar(wheat1) }) //porque ya hay una plantas allí y no acepto 2 plantas en el mismo lugar ahora
 
   }
 
