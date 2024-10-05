@@ -1,6 +1,8 @@
 import wollok.game.*
 import hector.*
 import cultivos.*
+import granjaYcosas.*
+
 
 program farmville {
 	//  CONFIG	
@@ -10,9 +12,23 @@ program farmville {
 	game.ground("ground.png")
 
 	//  VISUALES
- 	game.addVisualCharacter(hector)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
+ 	game.addVisualCharacter(hector) //Para que se pueda mover con las flechas default
+	game.addVisual( mercado1 )
+	game.addVisual( mercado2 ) 
+	
+	//controles (los cambio por comodidad)
+	keyboard.q().onPressDo({hector.sembrar( new Corn() )}) 
+	keyboard.w().onPressDo({hector.sembrar( new Wheat() )})
+	keyboard.e().onPressDo({hector.sembrar( new Tomaco() )})
+	keyboard.r().onPressDo({hector.regar()})
+	keyboard.c().onPressDo({hector.cosechar()})
+	keyboard.v().onPressDo({hector.venderAqui()})
+	keyboard.space().onPressDo({hector.hablar()})
+
+	//bonus
+	keyboard.a().onPressDo({hector.dejarAspersor( new Aspersor() )})
  	
- 	//  COMIENZA
+ 	//COMIENZA
 	game.start()
+	
 }
