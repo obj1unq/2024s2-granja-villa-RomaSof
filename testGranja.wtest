@@ -10,6 +10,7 @@ describe "hector, granja, plantas y cosas" {
     const corn1 = new Corn( position = 0) 
     const corn2 = new Corn( position = 0) 
     const wheat1 = new Wheat( position = 0) 
+    const aspersor1 = new Aspersor( position = 0 ) 
 
   method initialize(){
     game.height(10)
@@ -78,6 +79,18 @@ describe "hector, granja, plantas y cosas" {
     hector.venderAqui()
 
     assert.equals(300, hector.ganancias())
+    assert.equals(#{corn1, corn2}, mercado1.mercaderia())
+
+  }
+
+  test " dejar aspersor " {
+    hector.sembrar(corn1)
+    hector.position( game.at(1,0) )
+    hector.dejarAspersor(aspersor1)
+    aspersor1.regarPlantas()
+
+    assert.equals(#{aspersor1}, granja.cosasJardineria())
+    assert.equals("corn_adult.png", corn1.image())
 
   }
   

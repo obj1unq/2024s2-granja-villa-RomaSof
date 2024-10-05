@@ -61,7 +61,7 @@ object granja {
   //aspersor
   method dejarAspersorAqui(position, aspersor) {
     aspersor.position(position)
-    construcciones.add(aspersor)
+    cosasJardineria.add(aspersor)
   }
 
   method hayCosasDeJardineriaAqui(position) {
@@ -75,7 +75,6 @@ object granja {
   method plantasEnPerimetroDeAspersor(position) {
     const distanciasARegar= [position.up(1), position.right(1), position.down(1), position.left(1)]
   return cultivos.filter({cultivo => distanciasARegar.contains(cultivo.position())})
-  //return cultivos.filter({cultivo => cultivo.position() == distanciasAVer})
   }
 
 }
@@ -85,9 +84,9 @@ class Aspersor{
     var property position = null
     var property image = "aspersor.png"
 
-    method position(sembrador) {
-        position = sembrador.position()
-        game.addVisualCharacter( self )
+    method position(_position) {
+        position = _position
+        game.addVisual( self )
         self.regar()
     }
 
@@ -97,7 +96,7 @@ class Aspersor{
 
     method regarPlantas() {
       const plantasRegables = granja.plantasEnPerimetroDeAspersor(position)
-      plantasRegables.forEach({planta => planta.regar()})
+      plantasRegables.forEach({planta => planta.crecer()})
     }
 
 }
@@ -116,7 +115,6 @@ class Mercado {
     cajaMercado = self.valorDeCosecha(vendedor) //para que siempre tenga plata para pagarle al que vende
     self.pagar(vendedor)
     mercaderia.addAll(vendedor.cosecha())
-  //  self.venderMercaderia() no sé si debería simular la venta
   }
 
   method pagar(vendedor) {
@@ -127,9 +125,5 @@ class Mercado {
   method valorDeCosecha(propietario) {
     return  propietario.cosecha().map({planta => planta.precio()}).sum()
   }
-/*
-  method venderMercaderia() {
-    cajaMercado = self.valorDeCosecha(self)
-  }
-*/
+
 }
