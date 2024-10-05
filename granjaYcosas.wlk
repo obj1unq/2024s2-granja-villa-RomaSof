@@ -51,15 +51,11 @@ object granja {
 
   //vender
   method hayMercadosAqui(position) {
-    return not self.mercadosAqui(position).isEmpty()
+    return construcciones.any({mercado => mercado.position().equals(position)})
   }
 
-  method mercadosAqui(position) {
-    return construcciones.filter({mercado => mercado.position().equals(position)})
-  }
- //NO SÉ REALMENTE SI PUEDE HABER MÁS DE UN MERCADO EN EL MISMO LUGAR COMO UNA GALERÍA
   method primerMercadoAqui(position) {
-    return self.mercadosAqui(position).asList().head()
+    return construcciones.find({mercado => mercado.position().equals(position)})
   }
 
   //aspersor
